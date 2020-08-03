@@ -2,6 +2,7 @@ package ru.skillfactory;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * BankService - класс, который нарушает принцип единственной ответственности. У нас он сразу
@@ -33,14 +34,18 @@ public class BankService {
     }
 
     /**
-     * Метод проверяет что в Map-е есть аккаунт.
+     * Метод проверяет что в Map-е есть аккаунт, если есть вернёт реквезиты. В моей реализации
+     * метод просто вернёт реквезиты без генерации исключений. Вы можете использовать подход с
+     * исключениями, тогда на каждую ситуацию должно быть отдельное исключение
      *
      * @param username валидная строка.
      * @param password валидная строка.
-     * @return true если аккаунт есть, false если нет.
+     * @return возвращает объект Optional, который будет содержат строку - requisite,
+     *         если передоваемого пользователя нету или пароль не совпадает вы сможете
+     *         передать пустой объект Optional и проверить что он не пуст.
      */
-    public boolean contains(String username, String password) {
-        return false;
+    public Optional<String> getRequisiteIfPresent(String username, String password) {
+        return Optional.empty();
     }
 
     /**

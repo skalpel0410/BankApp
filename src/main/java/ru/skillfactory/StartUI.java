@@ -49,6 +49,7 @@ public class StartUI {
      * Метод должен работать пока пользователь не авторизуется (пока отключил цикл!).
      *
      * @return возвращает реквизиты аккаунта, под которым авторизовался пользователь.
+     *         Получайте их вызывом метода getRequisiteIfPresent, класса BankService.
      */
     public String authorization() {
         String rsl = null;
