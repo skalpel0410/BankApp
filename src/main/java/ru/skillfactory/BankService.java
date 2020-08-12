@@ -53,7 +53,6 @@ public class BankService {
      * если передаваемые реквизиты не валидны, это единственный способ сообщить о проблеме.
      *
      * @param requisite реквизиты, строка в произвольном формате.
-     *
      * @return кол-во средств в копейках (для других валют аналогично было бы).
      */
     public long balance(String requisite) {
@@ -63,10 +62,11 @@ public class BankService {
     /**
      * Метод должен пополнять баланс.
      *
-     * @param requisite
-     * @return
+     * @param requisite реквизиты, строка в произвольном формате.
+     * @param amount сумма для пополнения.
+     * @return возвращает true если баланс был увеличен.
      */
-    public boolean topUpBalance(String requisite) {
+    public boolean topUpBalance(String requisite, long amount) {
         return false;
     }
 
@@ -78,7 +78,6 @@ public class BankService {
      * @param srcRequisite реквизиты, строка в произвольном формате.
      * @param destRequisite реквизиты, строка в произвольном формате.
      * @param amount кол-во средств в копейках (для других валют аналогично было бы).
-     *
      * @return true если выполнены все условия, средства фактически переведены.
      */
     public boolean transferMoney(String username, String password, String srcRequisite,

@@ -9,13 +9,28 @@ package ru.skillfactory;
  */
 public class ValidateInput extends ConsoleInput {
 
+    /**
+     * Сами решите необходимо ли переопределение этого метода.
+     */
     @Override
     public String askStr(String question) {
         return super.askStr(question);
     }
 
+    /**
+     * Необходимо ли переопределять метод, или убрать переопределение вы решаете сами.
+     * На данный момент в этот методе может произойти непроверяемое исключение.
+     */
     @Override
     public int askInt(String question) {
         return super.askInt(question);
+    }
+
+    /**
+     * Сами решите необходимо ли переопределение этого метода.
+     */
+    @Override
+    public long askLong(String question) {
+        return super.askLong(question);
     }
 }

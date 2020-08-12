@@ -43,30 +43,51 @@ public class BankAccount {
         this.requisite = requisite;
     }
 
+    /**
+     * Геттер password.
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Сеттер password.
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * Геттер username.
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * Сеттер username.
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * Геттер balance.
+     */
     public long getBalance() {
         return balance;
     }
 
+    /**
+     * Сеттер balance.
+     */
     public void setBalance(long balance) {
         this.balance = balance;
     }
 
+    /**
+     * Геттер password.
+     */
     public String getRequisite() {
         return requisite;
     }
