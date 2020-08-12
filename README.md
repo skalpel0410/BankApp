@@ -8,14 +8,14 @@
 
 <ul>
     <li>
-        <a href="https://refactoring.guru/ru/design-patterns/strategy">Стратегия</a> - <i>interface Action и его реализации</i>.
+        <a href="https://refactoring.guru/ru/design-patterns/strategy" target="_blank">Стратегия</a> - <i>interface Action и его реализации</i>.
     </li>
     <li>
-        <a href="https://refactoring.guru/ru/design-patterns/facade">Фасад</a> (простая реализация) - <i>class BankService</i>.
+        <a href="https://refactoring.guru/ru/design-patterns/facade" target="_blank">Фасад</a> (простая реализация) - <i>class BankService</i>.
     </li>
 </ul>
 
-На сайте <a href="https://refactoring.guru/ru/design-patterns">refactoring.guru</a> есть очень интересный материал по
+На сайте <a href="https://refactoring.guru/ru/design-patterns" target="_blank">refactoring.guru</a> есть очень интересный материал по
 шаблонам проектирования. Советую посмотреть, но не спешить после прочтения в любой ситуации применять какой-либо шаблон,
 относитесь к этому как к приправе - можно переборщить с использованием и код станет слишком сложным. 
 
