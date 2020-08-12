@@ -11,6 +11,19 @@ public class StartUI {
     private final Input input;
 
     /**
+     * Конструктор со всеми параметрами.
+     *
+     * @param bankService банковский сервис
+     * @param actions лист со списком действий
+     * @param input одна из реализаций интерфейса
+     */
+    public StartUI(BankService bankService, List<TerConsumer<BankService, Input, String>> actions, Input input) {
+        this.bankService = bankService;
+        this.actions = actions;
+        this.input = input;
+    }
+
+    /**
      * Здесь будет происходить инициализация меню, вы
      *  1. Авторизовываете пользователя.
      *  2. Печатаете меню.
@@ -30,19 +43,6 @@ public class StartUI {
             select = input.askInt("Выберите пункт меню: ");
         }
         System.out.println("Попрощались здесь...");
-    }
-
-    /**
-     * Конструктор со всеми параметрами.
-     *
-     * @param bankService банковский сервис
-     * @param actions лист со списком действий
-     * @param input одна из реализаций интерфейса
-     */
-    public StartUI(BankService bankService, List<TerConsumer<BankService, Input, String>> actions, Input input) {
-        this.bankService = bankService;
-        this.actions = actions;
-        this.input = input;
     }
 
     /**
