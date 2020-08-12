@@ -21,5 +21,5 @@
 
 Ниже UML схема, ознакомьтесь с ней для понимания структуры проекта.<br><br>
 
-![ScreenShot](/UML_shema.JPG)
+![ScreenShot](/UML_shema.PNG)
 
