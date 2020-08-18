@@ -101,13 +101,7 @@ public class BankAccount {
             return false;
         }
         BankAccount that = (BankAccount) o;
-        if (balance != that.balance) {
-            return false;
-        }
         if (!Objects.equals(username, that.username)) {
-            return false;
-        }
-        if (!Objects.equals(password, that.password)) {
             return false;
         }
         return Objects.equals(requisite, that.requisite);
@@ -116,8 +110,6 @@ public class BankAccount {
     @Override
     public int hashCode() {
         int result = username != null ? username.hashCode() : 0;
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (int) (balance ^ (balance >>> 32));
         result = 31 * result + (requisite != null ? requisite.hashCode() : 0);
         return result;
     }

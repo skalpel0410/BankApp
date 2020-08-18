@@ -19,7 +19,7 @@ public class BankService {
      *
      * Подумайте почему используется именно map, можно ли использовать решение лучше.
      */
-    private Map<String, BankAccount> accounts = new HashMap<>();
+    private final Map<String, BankAccount> accounts = new HashMap<>();
 
     /**
      * Метод добавляете аккаунт в Map-у если у аккаунта уникальные реквизиты (логин тоже нужно проверить,
