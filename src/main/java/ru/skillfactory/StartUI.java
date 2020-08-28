@@ -23,8 +23,9 @@ public class StartUI {
         boolean run = true;
         while (run) {
             int select = input.askInt("Выберите пункт меню: ");
+            // Здесь такой if, который не даст выйти в ArrayIndexOutOfBoundsException.
             if (select >= 0 && select <= actions.length - 1) {
-                // Мы обращаемся к листу и запускаем один из статических методов, которые мы хранили в листе.
+                // Мы по индексу массива вызываем метод execute нашего Action-объекта.
                 run = actions[select].execute(bankService, input, requisite);
             } else {
                 System.out.println("Такого пункта нету...");
