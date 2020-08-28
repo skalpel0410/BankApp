@@ -76,7 +76,7 @@ public class StartUI {
         bankService.addAccount(new BankAccount("", "", ""));
         // Ещё аккаунты
 
-        // Наши действия мы будет хранить в специальном листе, вызывать из этого же списка
+        // В массиве хранятся объекты, которые представляют наши действия.
         UserAction[] actions = {
                 new ShowBalanceAction(),
                 new TopUpBalanceAction(),
