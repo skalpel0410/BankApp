@@ -23,7 +23,7 @@ public class Exit implements UserAction {
      */
     @Override
     public boolean execute(BankService bankService, Input input, String requisite) {
-        System.out.println("Приложение завершило работы.");
+        System.out.println("Приложение завершило работу.");
         return false;
     }
 }

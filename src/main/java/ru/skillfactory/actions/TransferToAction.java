@@ -25,6 +25,12 @@ public class TransferToAction implements UserAction {
      */
     @Override
     public boolean execute(BankService bankService, Input input, String requisite) {
+        String username = bankService.getNameByRequisite(requisite).get();
+        String destRequisite = bankService.getRequisiteByName(input.askStr("Введите имя получателя: ")).get();
+        long amount = input.askLong("Введите сумму перевода");
+        String password = input.askStr("Введите свой пароль для подтверждения перевода");
+        bankService.transferMoney(username, password, requisite, destRequisite, amount);
+        System.out.println("Перевод успешно произведен. Остаток средств на Вашем балансе:" + bankService.balance(requisite));
         return true;
     }
 }

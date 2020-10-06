@@ -1,5 +1,7 @@
 package ru.skillfactory;
 
+import java.util.Scanner;
+
 /**
  * Этот класс обновлённая версия вашего консольного ввода, здесь не просто спрашивайте ввод, а проверяйте его.
  * Главная задача данного класса решить проблему ошибок ввода пользователем.
@@ -8,13 +10,14 @@ package ru.skillfactory;
  * Требования к askStr сформулируйте сами или не переопределяйте его если с ним проблем не увидите.
  */
 public class ValidateInput extends ConsoleInput {
-
+    private final Scanner scanner = new Scanner(System.in);
     /**
      * Сами решите необходимо ли переопределение этого метода.
      */
     @Override
     public String askStr(String question) {
-        return super.askStr(question);
+        System.out.print(question);
+        return scanner.nextLine();
     }
 
     /**
@@ -23,7 +26,10 @@ public class ValidateInput extends ConsoleInput {
      */
     @Override
     public int askInt(String question) {
-        return super.askInt(question);
+        try {
+            return Integer.parseInt(askStr(question));
+        } catch (NumberFormatException e) {}
+        return -1;
     }
 
     /**
@@ -31,6 +37,10 @@ public class ValidateInput extends ConsoleInput {
      */
     @Override
     public long askLong(String question) {
-        return super.askLong(question);
+        try {
+            return Long.parseLong(askStr(question));
+        } catch (NumberFormatException e) {}
+        return -1;
+        }
     }
-}
+

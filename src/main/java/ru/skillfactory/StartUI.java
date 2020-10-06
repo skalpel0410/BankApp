@@ -2,6 +2,8 @@ package ru.skillfactory;
 
 import ru.skillfactory.actions.*;
 
+import java.util.Optional;
+
 /**
  * Класс, который запускает общение с пользователем.
  */
@@ -44,7 +46,7 @@ public class StartUI {
      */
     private String authorization(BankService bankService, Input input) {
         String rsl = null;
-        boolean authComplete = true;
+        boolean authComplete = false;
         while (!authComplete) { // цикл отключён!!!
             /*
              * Запрашиваете у пользователя логин, пароль пока он не пройдёт авторизацию.
@@ -53,6 +55,12 @@ public class StartUI {
              */
             String login = input.askStr("Ваш логин: ");
             String password = input.askStr("Ваш password: ");
+            if (bankService.getRequisiteIfPresent(login, password).isPresent()) {
+                authComplete = true;
+                rsl = bankService.getRequisiteIfPresent(login, password).get();
+            } else {
+                System.out.println("Введены неверные авторизационные данные. Попробуйте еще раз.");
+            }
         }
         return rsl;
     }
@@ -73,7 +81,11 @@ public class StartUI {
         BankService bankService = new BankService();
         // здесь создадите несколько аккаунтов на проверку
         // данные осмысленно заполните, не просто пустые строки
-        bankService.addAccount(new BankAccount("", "", ""));
+        bankService.addAccount(new BankAccount("Вася", "123", "1"));
+        bankService.addAccount(new BankAccount("Петя", "123", "2"));
+        bankService.addAccount(new BankAccount("Маша", "123", "3"));
+        bankService.addAccount(new BankAccount("Саша", "123", "4"));
+        bankService.addAccount(new BankAccount("Оля", "123", "5"));
         // Ещё аккаунты
 
         // В массиве хранятся объекты, которые представляют наши действия.
