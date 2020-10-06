@@ -16,10 +16,7 @@ public class BankAccount {
      */
     private String password;
     /**
-     * Баланс (пусть будет в копейках, при печати можете в рубли переводить, для других валют аналогично).
-     * Почему long? - Прочитайте тему, вдруг когда-нибудь спросят.
-     *
-     * https://ru.stackoverflow.com/questions/667706/%D0%92-%D1%87%D0%B5%D0%BC-%D1%85%D1%80%D0%B0%D0%BD%D0%B8%D1%82%D1%8C-%D0%B4%D0%B5%D0%BD%D1%8C%D0%B3%D0%B8-float-double
+     * Баланс (в копейках).
      */
     private long balance;
     /**

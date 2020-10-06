@@ -108,7 +108,7 @@ public class BankService {
      */
     public boolean topUpBalance(String requisite, long amount) {
         BankAccount account = accounts.get(requisite);
-        account.setBalance(account.getBalance() + amount);
+        account.setBalance(account.getBalance() + amount*100);
         return true;
     }
 
@@ -129,12 +129,12 @@ public class BankService {
                 getRequisiteIfPresent(username, password).get().equals(srcRequisite) & //проверяем что есть счет с такой учеткой
                 accounts.get(destRequisite) != null & //проверяем что есть счет с такими реквизитами
                 accounts.get(srcRequisite) != null & //проверяем что есть счет с такими реквизитами
-                accounts.get(srcRequisite).getBalance()>=amount & // проверяем достаточность средств у источника
+                accounts.get(srcRequisite).getBalance()>=amount*100 & // проверяем достаточность средств у источника
                 amount > 0) {
             BankAccount srcAccount = accounts.get(srcRequisite);
             BankAccount destAccount = accounts.get(destRequisite);
-            srcAccount.setBalance(srcAccount.getBalance() - amount);
-            destAccount.setBalance(destAccount.getBalance() + amount);
+            srcAccount.setBalance(srcAccount.getBalance() - amount*100);
+            destAccount.setBalance(destAccount.getBalance() + amount*100);
             rsl = true;
         }
 

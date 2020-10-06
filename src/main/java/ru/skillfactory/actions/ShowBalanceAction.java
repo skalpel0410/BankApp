@@ -24,7 +24,7 @@ public class ShowBalanceAction implements UserAction {
      */
     @Override
     public boolean execute(BankService bankService, Input input, String requisite) {
-        System.out.println("Ваш баланс равен: " + bankService.balance(requisite));
+        System.out.println("Ваш баланс равен: " + bankService.balance(requisite)/100);
         return true;
     }
 }
