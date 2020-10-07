@@ -2,7 +2,11 @@ package ru.skillfactory;
 
 import ru.skillfactory.actions.*;
 
-import java.util.Optional;
+import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  * Класс, который запускает общение с пользователем.
@@ -19,8 +23,8 @@ public class StartUI {
      * @param actions массив с действиями.
      * @param input Input объект.
      */
-    public void init(BankService bankService, UserAction[] actions, Input input) {
-        String requisite = authorization(bankService, input);
+    public void init(BankService bankService, UserAction[] actions, Input input, Logger logger) {
+        String requisite = authorization(bankService, input, logger);
         showMenu(actions);
         boolean run = true;
         while (run) {
@@ -28,7 +32,7 @@ public class StartUI {
             // Здесь такой if, который не даст выйти в ArrayIndexOutOfBoundsException.
             if (select >= 0 && select <= actions.length - 1) {
                 // Мы по индексу массива вызываем метод execute нашего Action-объекта.
-                run = actions[select].execute(bankService, input, requisite);
+                run = actions[select].execute(bankService, input, requisite, logger);
             } else {
                 System.out.println("Такого пункта нету...");
             }
@@ -44,7 +48,7 @@ public class StartUI {
      * @return возвращает реквизиты аккаунта, под которым авторизовался пользователь.
      *
      */
-    private String authorization(BankService bankService, Input input) {
+    private String authorization(BankService bankService, Input input, Logger logger) {
         String rsl = null;
         boolean authComplete = false;
         while (!authComplete) { // цикл отключён!!!
@@ -55,9 +59,9 @@ public class StartUI {
              */
             String login = input.askStr("Ваш логин: ");
             String password = input.askStr("Ваш password: ");
-            if (bankService.getRequisiteIfPresent(login, password).isPresent()) {
+            if (bankService.getRequisiteIfPresent(login, password, logger).isPresent()) {
                 authComplete = true;
-                rsl = bankService.getRequisiteIfPresent(login, password).get();
+                rsl = bankService.getRequisiteIfPresent(login, password, logger).get();
             } else {
                 System.out.println("Введены неверные авторизационные данные. Попробуйте еще раз.");
             }
@@ -78,6 +82,25 @@ public class StartUI {
     }
 
     public static void main(String[] args) {
+        // логирование
+        Logger logger = Logger.getLogger(BankService.class.getName());
+        FileHandler fileHandler = null;
+        try {
+            fileHandler = new FileHandler("MyLogFile.log");
+            logger.addHandler(fileHandler);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fileHandler.setFormatter(formatter);
+        } catch (SecurityException e){
+            logger.log(Level.SEVERE, "Не удалось создать файл лога из-за политики безопасности", e);
+        } catch(
+                IOException e)
+
+        {
+            logger.log(Level.SEVERE, "Не удалось создать файл лога из-за ошибки ввода-вывода", e);
+        }
+
+
+
         BankService bankService = new BankService();
         //заполнение тестовыми данными
         bankService.addAccount(new BankAccount("Вася", "123", "1"));
@@ -96,6 +119,6 @@ public class StartUI {
         // создаем экземпляр ValidateInput
         Input input = new ValidateInput();
         // Запускаем наш UI передавая аргументами банковский сервис, экшены и Input.
-        new StartUI().init(bankService, actions, input);
+        new StartUI().init(bankService, actions, input, logger);
     }
 }

@@ -19,11 +19,9 @@ public class ConsoleInput implements Input {
         return Integer.parseInt(askStr(question));
     }
 
-    /**
-     * Метод необходимо реализовать.
-     */
+
     @Override
     public long askLong(String question) {
-        return 0;
+        return Long.parseLong(askStr(question));
     }
 }

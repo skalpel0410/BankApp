@@ -3,6 +3,7 @@ package ru.skillfactory.actions;
 import ru.skillfactory.*;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 /**
  * Класс для реализации действия "Перевести средства", используется в StartUI.
@@ -15,10 +16,7 @@ public class TransferToAction implements UserAction {
     }
 
     /**
-     * Перевести средства - также общаетесь в этом методе с пользователем и передаёте информацию,
-     * так как операция важная желательно ещё раз заставлять вводить пароль/логин и передавать информацию
-     * в BankService. Exceptions пользователю печатать не надо (как и в других методах этого класса),
-     * вводите подсказки или написанные вами сообщения об ошибках.
+     * Перевести средства - так как операция важная заставляем вводить пароль.
      *
      * @param bankService BankService объект.
      * @param input       Input объект.
@@ -26,13 +24,13 @@ public class TransferToAction implements UserAction {
      * @return возвращает всегда true, приложение продолжает работать.
      */
     @Override
-    public boolean execute(BankService bankService, Input input, String requisite) {
-        String username = bankService.getNameByRequisite(requisite).get();
+    public boolean execute(BankService bankService, Input input, String requisite, Logger logger) {
+        String username = bankService.getNameByRequisite(requisite, logger).get();
         //валидация получателя
         boolean isDestCorrect = false;
         Optional<String> destOptional = Optional.of("");
         while (!isDestCorrect) {
-            destOptional = bankService.getRequisiteByName(input.askStr("Введите имя получателя: "));
+            destOptional = bankService.getRequisiteByName(input.askStr("Введите имя получателя: "), logger);
             if (destOptional.isPresent()) {
                 isDestCorrect = true;
             } else {
@@ -44,9 +42,9 @@ public class TransferToAction implements UserAction {
         boolean isAmountCorrect = false;
         long amount = -1;
         while (!isAmountCorrect) {
-            amount = input.askLong("Введите сумму перевода");
+            amount = input.askLong("Введите сумму перевода: ");
             if (amount >= 0) {
-                if (bankService.balance(requisite) >= amount*100) {
+                if (bankService.balance(requisite, logger) >= amount*100) {
                     isAmountCorrect = true;
                 } else {
                     System.out.println("На Вашем счете недостаточно средств для перевода. Попробуйте еще раз");
@@ -55,11 +53,11 @@ public class TransferToAction implements UserAction {
                 System.out.println("Некорректно введенная сумма. Попробуйте еще раз.");
             }
         }
-        String password = input.askStr("Введите свой пароль для подтверждения перевода");
-        if (bankService.getRequisiteIfPresent(username, password).isPresent()) {
+        String password = input.askStr("Введите свой пароль для подтверждения перевода: ");
+        if (bankService.getRequisiteIfPresent(username, password, logger).isPresent()) {
 
-            bankService.transferMoney(username, password, requisite, destRequisite, amount);
-            System.out.println("Перевод успешно произведен. Остаток средств на Вашем балансе:" + bankService.balance(requisite)/100);
+            bankService.transferMoney(username, password, requisite, destRequisite, amount, logger);
+            System.out.println("Перевод успешно произведен. Остаток средств на Вашем балансе:" + bankService.balance(requisite, logger)/100);
         } else {
             System.out.println("Пароль неверен. Транзакция отклонена.");
         } return true;

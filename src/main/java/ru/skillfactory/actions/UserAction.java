@@ -2,6 +2,8 @@ package ru.skillfactory.actions;
 
 import ru.skillfactory.*;
 
+import java.util.logging.Logger;
+
 /**
  * Интрефейс для реализации различных действий, которые используются в UI.
  */
@@ -22,5 +24,5 @@ public interface UserAction {
      * @param requisite Строка в произвольной форме, используется для поиска пользователя.
      * @return true если после этого действие приложение продолжает работу.
      */
-    boolean execute(BankService bankService, Input input, String requisite);
+    boolean execute(BankService bankService, Input input, String requisite, Logger logger);
 }

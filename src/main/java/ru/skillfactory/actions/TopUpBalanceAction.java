@@ -2,6 +2,8 @@ package ru.skillfactory.actions;
 
 import ru.skillfactory.*;
 
+import java.util.logging.Logger;
+
 /**
  * Класс для реализации действия "Пополнить баланс", используется в StartUI.
  */
@@ -13,9 +15,6 @@ public class TopUpBalanceAction implements UserAction {
     }
 
     /**
-     * В этом методе обращайтесь к банковскому сервису, уточняйте у пользователя на сколько он хочет
-     * пополнить баланс, каким способом... печатайте результат, может быть баланс после пополнения
-     * (на ваше усмотрение).
      *
      * @param bankService BankService объект.
      * @param input       Input объект.
@@ -23,18 +22,19 @@ public class TopUpBalanceAction implements UserAction {
      * @return возвращает всегда true, приложение продолжает работать.
      */
     @Override
-    public boolean execute(BankService bankService, Input input, String requisite) {
-        Long amount = 0l;
-        Boolean isCorrect = false;
+    public boolean execute(BankService bankService, Input input, String requisite, Logger logger) {
+        long amount = 0L;
+        boolean isCorrect = false;
         while (!isCorrect) {
-            amount = input.askLong("Введите сумму пополнения");
+            amount = input.askLong("Введите сумму пополнения: ");
             if (amount < 0) {
                 System.out.println("Введены неверные данные. Попробуйте еще раз.");
             } else {
                 isCorrect = true;
             }
         }
-        bankService.topUpBalance(requisite, amount);
+        bankService.topUpBalance(requisite, amount, logger);
+        System.out.println("Баланс успешно пополнен и составляет: " + bankService.balance(requisite, logger)/100);
         return true;
     }
 }
